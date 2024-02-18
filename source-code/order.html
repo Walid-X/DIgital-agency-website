@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Information</title>
+    <link rel="stylesheet" href="order.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-KVZ8DCoyyOTi2Zju2NL0+CyNneB8cIVQcx0WKrveD1Z8sw7R9oAZf4z6jQzI/Kgvu12unKmU3VazOsj3OaHTyw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="all">
+        <div class="container">
+            <h2 class="tit">Order Form</h2>
+            <form id="contactForm" action="#" method="post">
+                <div class="form-group step1">
+                    <label class="lab" for="contactInformation">Contact Information</label>
+
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                    
+                    <label for="email">Email Address:</label>
+                    <input type="email" id="email" name="email" required>
+                    
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" required>
+                    
+                    <label for="company">Company Name:</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                
+                <div class="form-group step2" style="display: none;">
+                    <label class="lab" for="projectDescription">Project Description</label>
+                    <textarea id="projectDescription" name="projectDescription" rows="4" cols="10" required></textarea>
+                </div>
+                
+                <div class="form-group step3" style="display: none;">
+                    <label class="lab" for="technicalRequirements">Technical Requirements</label>
+                    <p>Platform Preferences:</p>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="desktop" name="platform" value="Desktop">
+                        <span class="checkmark"></span>
+                        <label for="desktop">Desktop Application - Software that runs on your computer</label><br>
+                        
+                        <input type="checkbox" id="android" name="platform" value="Android">
+                        <span class="checkmark"></span>
+                        <label for="android">Android App - Mobile application for Android devices</label><br>
+                        
+    <input type="checkbox" id="ios" name="platform" value="iOS">
+    <span class="checkmark"></span>
+    <label for="ios">iOS App - Mobile application for iOS devices</label><br>
+    
+    <input type="checkbox" id="wordpress" name="platform" value="WordPress">
+    <span class="checkmark"></span>
+    <label for="wordpress">WordPress - Easily create and manage websites without coding</label><br>
+    
+    <input type="checkbox" id="coding" name="platform" value="Coding">
+    <span class="checkmark"></span>
+    <label for="coding">Custom Coding - Tailored software solutions created by developers</label>
+                        <!-- Add more checkboxes here -->
+                    </div>
+                    
+                </div>
+                
+                <div class="form-group step4" style="display: none;">
+                    <label class="lab" for="budgetTimeline">Budget and Timeline</label>
+                    <label for="budgetRange">Budget Range:</label>
+                    <select id="budgetRange" name="budgetRange">
+                        <option value="$500-$1000">$500 - $1000</option>
+                        <option value="$1000-$5000">$1000 - $5000</option>
+                        <option value="$5000-$10000">$5000 - $10000</option>
+                        <option value="$10000+">$10000+</option>
+                    </select><br>
+                    
+                    <label for="projectDeadline">Project Deadline:</label>
+                    <input type="date" id="projectDeadline" name="projectDeadline" required min="YYYY-MM-DD" max="YYYY-MM-DD">
+                    
+                </div>
+
+                <div class="form-group step5" style="display: none;">
+                    <label class="lab" for="additionalInformation">Additional Information (Optional)</label>
+                    <textarea id="additionalInformation" name="additionalInformation" rows="4" cols="10"></textarea>
+                </div>
+                <div class="form-group step6" style="display: none;">
+                    <h3>Confirmation</h3>
+                    <!-- Display user's information for confirmation -->
+                    <div id="confirmationData">
+                        <!-- Data entered will be displayed here -->
+                    </div>
+                    <button type="submit" class="sub">Submit</button>
+                </div>
+                <button type="button" class="nextBtn" onclick="nextStep()">Next</button>
+                <button type="button" class="prevBtn" onclick="prevStep()" style="display: none;">Previous</button>
+                <div class="success-message" style="display: none;">
+                    <h2>Success!</h2>
+                    <p>Your form has been submitted successfully.</p>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      document.querySelector('.sub').addEventListener('click', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Assuming the form validation is successful, you can show the success message
+    document.querySelector('.success-message').style.display = 'block';
+    document.querySelector('.step6').style.display = 'none'; 
+    document.querySelector('.prevBtn').style.display = 'none'; 
+    document.querySelector('.tit').style.display = 'none'; 
+    setTimeout(function() {
+        window.location.href = 'index.html'; // Redirect to the success page
+    }, 3000); // Redirect after 5 seconds (5000 milliseconds)
+});
+
+        function displayConfirmation() {
+            var fullName = document.getElementById('fullName').value;
+            var email = document.getElementById('email').value;
+            var phone = document.getElementById('phone').value;
+            var company = document.getElementById('company').value;
+
+            var confirmationData = document.getElementById('confirmationData');
+            confirmationData.innerHTML = "<p>Full Name: " + fullName + "</p>" +
+                                          "<p>Email Address: " + email + "</p>" +
+                                          "<p>Phone Number: " + phone + "</p>" +
+                                          "<p>Company Name: " + company + "</p>";
+        }
+
+        function editData() {
+            // Show previous step
+            prevStep();
+            // Scroll to the top of the page for better user experience
+            window.scrollTo(0, 0);
+        }
+        
+        // Call the displayConfirmation function when the confirmation step is shown
+        document.querySelector('.step6').addEventListener('click', displayConfirmation);
+    </script>
+</body>
+</html>
